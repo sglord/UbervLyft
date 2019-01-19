@@ -11,6 +11,9 @@
   "dependencies": {
     "express": "^4.13.4",
     "node-fetch": "^2.3.0",
-    "node-uber": "0.0.7"
+    "node-uber": "0.0.7",
+    "passport": "^0.4.0",
+    "passport-lyft": "^0.1.2",
+    "passport-uber-v2": "^0.1.1"
   }
 }

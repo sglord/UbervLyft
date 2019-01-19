@@ -63,78 +63,78 @@ app.get('/book', function(req, res) {
 	});
 });
 
-app.get('/products', async (request, res, next) => {
-	try {
-		const { data } = await axios.request(
-			'https://api.uber.com/v1.2/products?latitude=37.7752315&longitude=-122.418075',
-			config
-		);
-		console.log(data);
-		res.json(data);
-	} catch (error) {
-		console.log(error);
-	}
-});
+// app.get('/products', async (request, res, next) => {
+// 	try {
+// 		const { data } = await axios.request(
+// 			'https://api.uber.com/v1.2/products?latitude=37.7752315&longitude=-122.418075',
+// 			config
+// 		);
+// 		console.log(data);
+// 		res.json(data);
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// });
 
-app.get('/products/:id', async (req, res, next) => {
-	let id = req.params.id;
-	try {
-		const { data } = await axios.request(
-			`https://api.uber.com/v1.2/products/${id}`,
-			config
-		);
-		console.log(data);
-		res.json(data);
-	} catch (error) {
-		console.log(error);
-	}
-});
-app.get('/estimate/price', async (req, res, next) => {
-	try {
-		const { data } = await axios.request(
-			`https://api.uber.com/v1.2/estimates/price?start_latitude=37.7752315&start_longitude=-122.418075&end_latitude=37.7752415&end_longitude=-122.518075`,
-			config
-		);
-		const comparePrice = (a, b) => {
-			if (a.high_estimate === null) {
-				return 1;
-			}
-			if (b.high_estimate === null) {
-				return -1;
-			}
-			return (
-				(a.high_estimate + a.low_estimate) / 2 -
-				(b.high_estimate + b.low_estimate) / 2
-			);
-		};
-		data.prices.sort(comparePrice);
-		//VVVVV return lowest single itemVVVVV
-		// res.json(data.prices[0]);
-		//VVVV return sorted data VVVVVV
-		res.json(data);
-	} catch (error) {
-		console.log(error);
-	}
-});
+// app.get('/products/:id', async (req, res, next) => {
+// 	let id = req.params.id;
+// 	try {
+// 		const { data } = await axios.request(
+// 			`https://api.uber.com/v1.2/products/${id}`,
+// 			config
+// 		);
+// 		console.log(data);
+// 		res.json(data);
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// });
+// app.get('/estimate/price', async (req, res, next) => {
+// 	try {
+// 		const { data } = await axios.request(
+// 			`https://api.uber.com/v1.2/estimates/price?start_latitude=37.7752315&start_longitude=-122.418075&end_latitude=37.7752415&end_longitude=-122.518075`,
+// 			config
+// 		);
+// 		const comparePrice = (a, b) => {
+// 			if (a.high_estimate === null) {
+// 				return 1;
+// 			}
+// 			if (b.high_estimate === null) {
+// 				return -1;
+// 			}
+// 			return (
+// 				(a.high_estimate + a.low_estimate) / 2 -
+// 				(b.high_estimate + b.low_estimate) / 2
+// 			);
+// 		};
+// 		data.prices.sort(comparePrice);
+// 		//VVVVV return lowest single itemVVVVV
+// 		// res.json(data.prices[0]);
+// 		//VVVV return sorted data VVVVVV
+// 		res.json(data);
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// });
 
-app.get('/estimate/time', async (req, res, next) => {
-	try {
-		const { data } = await axios.request(
-			'https://api.uber.com/v1.2/estimates/time?start_latitude=37.7752315&start_longitude=-122.418075',
-			config
-		);
-		const compareTime = (a, b) => {
-			return a.estimate - b.estimate;
-		};
-		data.times.sort(compareTime);
-		//VVVVV return lowest single itemVVVVV
-		// res.json(data.times[0]);
-		//VVVV return sorted data VVVVVV
-		res.json(data);
-	} catch (error) {
-		console.log(error);
-	}
-});
+// app.get('/estimate/time', async (req, res, next) => {
+// 	try {
+// 		const { data } = await axios.request(
+// 			'https://api.uber.com/v1.2/estimates/time?start_latitude=37.7752315&start_longitude=-122.418075',
+// 			config
+// 		);
+// 		const compareTime = (a, b) => {
+// 			return a.estimate - b.estimate;
+// 		};
+// 		data.times.sort(compareTime);
+// 		//VVVVV return lowest single itemVVVVV
+// 		// res.json(data.times[0]);
+// 		//VVVV return sorted data VVVVVV
+// 		res.json(data);
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// });
 
 app.listen(3000, function() {
 	console.log('Listening on port 3000!');
